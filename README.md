@@ -36,8 +36,11 @@ npm test
 - npm，包管理工具
 
 你开发时候依赖的东西<br/>
+
 > npm install "模块" --save --dev
+
 你发布之后还依赖的东西<br/>
+
 > npm install "模块" --save
 
 
