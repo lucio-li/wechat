@@ -1,6 +1,6 @@
-# v-cnode
+# wechat
 
-> vue 模仿cnode社区
+> wechat单页应用
 
 ## 安装运行
 
@@ -32,11 +32,8 @@ npm test
 - node.js，搭建vue-cli运行环境、搭建临时后端用于前端测试
 - bootstrap，实现响应式开发，兼容PC端和移动端
 - webpack，打包工具
-- mangodb，数据库
-
-## 后端技术栈
-- node.js，搭建后端操作数据库
-- mangodb/mysql，数据库
+- mysql，数据库
+- npm，包管理工具
 
 你开发时候依赖的东西<br/>
 > npm install "模块" --save --dev
