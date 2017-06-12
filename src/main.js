@@ -8,7 +8,7 @@ import cream from 'components/cream.vue'
 import qa from 'components/qa.vue'
 
 import './assets/bootstrap/css/bootstrap.min.css'
-
+// 添加了一行注释
 import $ from 'jquery'
 console.log($(document))
 
