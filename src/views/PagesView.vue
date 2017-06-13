@@ -1,6 +1,10 @@
 <template>
+<div>
     <h1>PagesView.vue</h1>
     <header-bar></header-bar>
+    <router-view></router-view>
+</div>
+
 </template>
 
 <script>

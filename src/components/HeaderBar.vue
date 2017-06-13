@@ -1,13 +1,33 @@
 <template>
-  <h1>header</h1>
-  <router-link to="/foo">Go to Foo</router-link>
-  <router-link to="/bar">Go to Bar</router-link>
-  <!-- 路由出口 -->
-  <!-- 路由匹配到的组件将渲染在这里 -->
-  <router-view></router-view>
+  <div>
+    <h1>
+      header</h1>
+    <ul class="nav">
+      <li>
+        <router-link style="color: #2384E8" :to="{ name: 'MovieView'}">
+          电影
+        </router-link>
+      </li>
+      <li>
+        <router-link style="color: #9F7860" :to="{ name: 'BookView'}">
+          图书
+        </router-link>
+      </li>
+      <li>
+        <router-link style="color: #E4A813" :to="{ name: 'StatusView'}">
+          广播
+        </router-link>
+      </li>
+      <li>
+        <router-link style="color: #2AB8CC" :to="{ name: 'GroupView'}">
+          小组
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
-<script  type="text/ecmascript-6">
+<script>
 export default {
   name: 'header',
 }

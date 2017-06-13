@@ -3,16 +3,16 @@ import Router from 'vue-router'
 import PagesView from '../views/PagesView'
 Vue.use(Router)
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      redirect: '/pages/',
-    },
-    {
-      path: '/pages',
-      component: PagesView,
-    }
-  ]
+  routes: [{
+    path: '/',
+    redirect: '/pages'
+  }, {
+    path: '/pages',
+    component: PagesView
+  }, {
+    path: '*',
+    redirect: '/pages'
+  }]
 })
 // export default new Router({
 //   routes: [
