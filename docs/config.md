@@ -186,3 +186,8 @@ For detailed explanation, checkout the [Douban Api V2](https://developers.douban
 └── static
     └── logo.png
 ```
+
+## Change log
+
+- May 28, 2017:
+  - Using superagent
