@@ -66,6 +66,10 @@ module.exports = {
       }
     },
     {
+      test: /\.(scss|sass)$/,
+      loader: 'style-loader!css-loader!sass-loader'
+    },
+    {
       test: /\.json$/,
       loader: 'json'
     },
