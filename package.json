@@ -1,7 +1,7 @@
 {
   "name": "v-cnode",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "Vue project using Webpack as the bundler.",
   "author": "Bob-huang-gdut <3570411064@qq.com>",
   "private": true,
   "scripts": {

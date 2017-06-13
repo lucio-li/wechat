@@ -6,10 +6,10 @@
  * 本文件为webpack基本配置文件
  * ======================================================== */
 let path = require('path'),
-    utils = require('./utils'),
-    config = require('../config'),
-    webpack = require("webpack"),
-    vueLoaderConfig = require('./vue-loader.conf')
+  utils = require('./utils'),
+  config = require('../config'),
+  webpack = require("webpack"),
+  vueLoaderConfig = require('./vue-loader.conf')
 
 const ROOT_PATH = path.resolve(__dirname);
 const APP_PATH = path.resolve(ROOT_PATH, 'src');
@@ -17,7 +17,7 @@ const APP_PATH = path.resolve(ROOT_PATH, 'src');
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
-
+//导出模块 common.js语法
 module.exports = {
   // 文件入口 entry
   entry: {
@@ -29,7 +29,7 @@ module.exports = {
     // 输出文件路径
     path: config.build.assetsRoot,
     // 输出文件名字
-    filename: '[name].js',
+    filename: '[name]-[hash].js',
     // 公共路径输出配置
     publicPath: process.env.NODE_ENV === 'production' ?
       config.build.assetsPublicPath : config.dev.assetsPublicPath
@@ -43,6 +43,7 @@ module.exports = {
     })
   ],
   resolve: {
+    // 默认文件扩展名
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
