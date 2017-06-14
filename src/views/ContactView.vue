@@ -1,22 +1,18 @@
 <template>
-<div>
-    <h1>PagesView.vue</h1>
-    <header-bar></header-bar>
-    <router-view></router-view>
-</div>
-
+    <div>
+        <h1>ContactView</h1>
+    </div>
 </template>
 
 <script>
-import HeaderBar from '../components/HeaderBar'
 export default {
-    name: "pages-view",
+    nam:'ContactView',
     data() {},
     methods: {},
     props: [],
     computed: {},
     watch: {},
-    components: { HeaderBar },
+    components: {},
     // 生命周期
     beforeCreate() {
         // 配置数据观测（编译模版前）的工作

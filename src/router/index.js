@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import PagesView from '../views/PagesView'
+import WechatView from '../views/WechatView'
 Vue.use(Router)
 export default new Router({
   routes: [{
@@ -8,7 +9,27 @@ export default new Router({
     redirect: '/pages'
   }, {
     path: '/pages',
-    component: PagesView
+    component: PagesView,
+    children: [{
+      path: '',
+      redirect: '/pages/wechat'
+    }, {
+      path: 'wechat',
+      name: 'WechatView',
+      component: WechatView
+    }, {
+      path: 'contact',
+      name: 'WechatView',
+      component: WechatView
+    },  {
+      path: 'wechat',
+      name: 'WechatView',
+      component: WechatView
+    },  {
+      path: 'wechat',
+      name: 'WechatView',
+      component: WechatView
+    },  ]
   }, {
     path: '*',
     redirect: '/pages'
