@@ -5,7 +5,7 @@
 
 <struts>
 
-	<package name="wechat" extends="struts-default">
+	<package name="wechat" namespace="/" extends="struts-default">
 	
 	
 	
@@ -31,7 +31,7 @@
 		<!-- Ation实例交给spring容器创建 -->
 		
 		<!-- Action -->
-		<action name="testAction" class="main.action.TestAction">
+		<action name="registerAction" class="main.action.RegisterAction" >
 		
 			<!-- 失败 -->
 			<result name="faild">/login.jsp</result>

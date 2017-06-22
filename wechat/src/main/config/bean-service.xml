@@ -16,8 +16,8 @@
 
 	<!-- Service 需要注入 Dao -->
 	
-	<bean id="testServiceImpl" class="main.service.impl.TestServiceImpl">
-		<property name="testDaoImpl" ref="testDaoImpl"></property>
+	<bean id="registerService" class="main.service.impl.RegisterServiceImpl">
+		<property name="registerDao" ref="registerDao"></property>
 	</bean>
 	
 	

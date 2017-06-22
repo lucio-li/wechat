@@ -15,10 +15,10 @@
      	 http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- 引入其他配置文件 -->
-	<import resource="config/bean-base.xml"/>
-	<import resource="config/bean-dao.xml"/>
-	<import resource="config/bean-service.xml"/>
-	<import resource="config/bean-action.xml"/>
+	<import resource="main/config/bean-base.xml"/>
+	<import resource="main/config/bean-dao.xml"/>
+	<import resource="main/config/bean-service.xml"/>
+	<import resource="main/config/bean-action.xml"/>
 </beans>     
 
 

@@ -14,21 +14,12 @@
          http://www.springframework.org/schema/tx
      	 http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<!-- Dao 注入 SessionFactory -->
-	
-	<bean id="testDaoImpl" class="main.dao.impl.TestDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+	<!-- Action中需要注入Service -->
+	<bean id="registerAction" class="main.action.RegisterAction" scope="prototype">
+		<property name="registerService" ref="registerService"></property>
 	</bean>
 	
-	
 </beans>     
-
-
-
-
-
-
-
 
 
 

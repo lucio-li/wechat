@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-6-21 20:45:48 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="main.entity.User" table="user">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="phone" type="java.lang.String">
+            <column name="phone" />
+        </property>
+        <property name="username" type="java.lang.String">
+            <column name="username" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" />
+        </property>
+        <property name="head_img" type="java.lang.String">
+            <column name="head_img" />
+        </property>
+        <property name="status" type="int">
+            <column name="status" />
+        </property>
+        <property name="identify_code" type="java.lang.String">
+            <column name="identify_code" />
+        </property>
+    </class>
+</hibernate-mapping>
