@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : mysql
 Source Server Version : 50718
-Source Host           : localhost:3306
+Source Host           : 127.0.0.1:3306
 Source Database       : wechat
 
 Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-06-19 11:10:11
+Date: 2017-06-23 11:49:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,8 +21,8 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `circle_praise`;
 CREATE TABLE `circle_praise` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `circle_id` int(11) DEFAULT NULL,
-  `friend_id` int(11) DEFAULT NULL,
+  `circle_id` int(11) NOT NULL,
+  `friend_id` int(11) NOT NULL,
   `friend_head_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `circle_id` (`circle_id`),
@@ -52,8 +52,8 @@ CREATE TABLE `friends` (
 DROP TABLE IF EXISTS `friend_chat_log`;
 CREATE TABLE `friend_chat_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `friend_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `friend_id` int(11) NOT NULL,
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `time` date DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -81,8 +81,8 @@ CREATE TABLE `friend_circle` (
 DROP TABLE IF EXISTS `friend_discuss`;
 CREATE TABLE `friend_discuss` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `circle_id` int(11) DEFAULT NULL,
-  `friend_id` int(11) DEFAULT NULL,
+  `circle_id` int(11) DEFAULT '0',
+  `friend_id` int(11) DEFAULT '0',
   `friend_head_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
@@ -108,7 +108,7 @@ CREATE TABLE `groups_message` (
 DROP TABLE IF EXISTS `group_chat_log`;
 CREATE TABLE `group_chat_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT '0',
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `time` date DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -142,7 +142,7 @@ CREATE TABLE `user` (
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `head_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '0',
   `identify_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -154,7 +154,7 @@ DROP TABLE IF EXISTS `user_group_setting`;
 CREATE TABLE `user_group_setting` (
   `user_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
-  `quiet` int(11) DEFAULT NULL,
+  `quiet` int(11) DEFAULT '0',
   `top` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`,`group_id`),
