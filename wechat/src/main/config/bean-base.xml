@@ -32,18 +32,36 @@
 			<props>
 				 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				 <prop key="hibernate.show_sql">true</prop>
+				 <prop key="hibernate.format_sql">true</prop> 
 				 <prop key="hibernate.hbm2ddl.auto">update</prop>
+				 <prop key="current_session_context_class">thread</prop>
 			</props>
 		</property>
 		<property name="mappingLocations">
 			<list>
-				<value>classpath:entity/*.hbm.xml</value>
+				<value>classpath:main/entity/*.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
 	
-	
-	
+	<!-- 3) 事务配置 -->
+	<!-- # 事务管理器 -->
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- # 事务增强 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*" read-only="false"/>
+		</tx:attributes>
+	</tx:advice>
+	<!-- # AOP配置 -->
+	<!-- 
+	<aop:config>
+		<aop:pointcut expression="execution(* main.service.impl.*.*(..))" id="pt"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pt"/>
+	</aop:config>
+	 -->
 	
 </beans>     
 

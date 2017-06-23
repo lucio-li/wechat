@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-6-21 20:45:48 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="main.entity.User" table="user">
+    <class name="main.entity.User" table="user" dynamic-insert="true" dynamic-update="true">
         <id name="id" type="int">
             <column name="id" />
             <generator class="native" />
@@ -26,5 +26,6 @@
         <property name="identify_code" type="java.lang.String">
             <column name="identify_code" />
         </property>
+        
     </class>
 </hibernate-mapping>
