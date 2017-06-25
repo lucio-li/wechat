@@ -31,7 +31,7 @@
 		<!-- Ation实例交给spring容器创建 -->
 		
 		<!-- Action -->
-		<action name="registerAction" class="main.action.RegisterAction" >
+		<action name="sendRegisterCode" class="main.action.RegisterAction" method="sendRegisterCode">
 		
 			<!-- 失败 -->
 			<result name="faild">/login.jsp</result>
@@ -40,6 +40,8 @@
 			<result name="success">/login.jsp</result>
 		
 		</action>
+		
+		
 	</package>
 
 </struts>

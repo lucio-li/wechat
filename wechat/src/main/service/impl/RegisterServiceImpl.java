@@ -25,14 +25,14 @@ public class RegisterServiceImpl implements RegisterService{
 		User user = (User) registerDao.findByPhone(phone);
 		
 		String code = null;
-		//如果手机还没注册，就把手机号，验证码插入数据库，并返回验证码
+		//如果手机还没注册，就把手机号，验证码插入数据库
 		if (user == null) {
 			code = createRandom();//随机产生4位验证码
 			user = new User();
 			user.setPhone(phone);
 			user.setIdentify_code(code);
 			registerDao.save(user);
-			return code;
+			return "success";
 		} else {
 			//数据库有这个手机号，但是还没注册成功
 			if (user.getStatus() == 0) {
@@ -40,10 +40,10 @@ public class RegisterServiceImpl implements RegisterService{
 				user.setIdentify_code(code);
 				
 				registerDao.update(user);//更新数据库的验证码
-				return code;
+				return "success";
 			} else {
 				//手机号已经注册了
-				return "false";
+				return "fail";
 			}
 		}
 		

@@ -19,7 +19,7 @@
 		<property name="jdbcUrl" value="jdbc:mysql:///wechat"></property>
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 		<property name="user" value="root"></property>
-		<property name="password" value="root"></property>
+		<property name="password" value="12345678"></property>
 		<property name="initialPoolSize" value="3"></property>
 		<property name="maxPoolSize" value="6"></property>
 	</bean>
