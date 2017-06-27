@@ -2,8 +2,8 @@
 Thumbs.db
 ehthumbs.db
 Desktop.ini
-wechat/classpath
-wechat/settings/*
+wechat/.classpath
+wechat/.settings/*
 
 # My configurations:
 db.ini

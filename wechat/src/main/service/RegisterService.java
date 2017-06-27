@@ -6,7 +6,7 @@ package main.service;
  */
 public interface RegisterService {
 	/**
-	 * 发送注册短信验证码
+	 * 娉ㄥ唽鐨勫彂閫侀獙璇佺爜
 	 */
 	String sendRegisterCode(String phoneNumber);
 }

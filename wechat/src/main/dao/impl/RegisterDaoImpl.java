@@ -1,5 +1,6 @@
 package main.dao.impl;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,14 +11,15 @@ import main.dao.RegisterDao;
 import main.entity.User;
 
 public class RegisterDaoImpl implements RegisterDao{
-	// 注入SessionFactory对象
+	// 娉ㄥ叆sessionFactory
 	private SessionFactory sessionFactory = null;
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 	@Override
 	public void save(User user) {
-		System.out.println("进入save方法");
+		System.out.println("杩涘叆save鏂规硶");
 		try {
 			sessionFactory.getCurrentSession().save(user);
 		} catch (Exception e) {
@@ -36,11 +38,11 @@ public class RegisterDaoImpl implements RegisterDao{
 		try {
 			session = sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(User.class);
-			// 构建条件
+			// 锟斤拷锟斤拷锟斤拷锟斤拷
 			criteria.add(Restrictions.eq("phone", phone));
 			
 			if (criteria.list().size() == 0) {
-				System.out.println("没有该数据");
+				System.out.println("没锟叫革拷锟斤拷锟斤拷");
 				return null;
 			} else {
 				user = (User) criteria.list().get(0);
@@ -57,7 +59,7 @@ public class RegisterDaoImpl implements RegisterDao{
 	public void update(User user) {
 		try {
 			sessionFactory.getCurrentSession().update(user);
-			sessionFactory.getCurrentSession().flush();//update要flush才能生效
+			sessionFactory.getCurrentSession().flush();//update要flush锟斤拷锟斤拷锟斤拷效
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

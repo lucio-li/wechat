@@ -10,10 +10,10 @@ import main.service.RegisterService;
 /**
  * 
  * @author lucio.li
- * ×¢²áÓÃµÄserviceÀà
+ * æ³¨å†Œçš„serviceç±»
  */
 public class RegisterServiceImpl implements RegisterService{
-	// IOC×¢Èë
+	// IOC×¢ï¿½ï¿½
 	private RegisterDao registerDao;
 	public void setRegisterDao(RegisterDaoImpl registerDao) {
 		this.registerDao = registerDao;
@@ -25,24 +25,24 @@ public class RegisterServiceImpl implements RegisterService{
 		User user = (User) registerDao.findByPhone(phone);
 		
 		String code = null;
-		//Èç¹ûÊÖ»ú»¹Ã»×¢²á£¬¾Í°ÑÊÖ»úºÅ£¬ÑéÖ¤Âë²åÈëÊý¾Ý¿â
+		//ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ã»×¢ï¿½á£¬ï¿½Í°ï¿½ï¿½Ö»ï¿½ï¿½Å£ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 		if (user == null) {
-			code = createRandom();//Ëæ»ú²úÉú4Î»ÑéÖ¤Âë
+			code = createRandom();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4Î»ï¿½ï¿½Ö¤ï¿½ï¿½
 			user = new User();
 			user.setPhone(phone);
 			user.setIdentify_code(code);
 			registerDao.save(user);
 			return "success";
 		} else {
-			//Êý¾Ý¿âÓÐÕâ¸öÊÖ»úºÅ£¬µ«ÊÇ»¹Ã»×¢²á³É¹¦
+			//ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½Ç»ï¿½Ã»×¢ï¿½ï¿½É¹ï¿½
 			if (user.getStatus() == 0) {
 				code = createRandom();
 				user.setIdentify_code(code);
 				
-				registerDao.update(user);//¸üÐÂÊý¾Ý¿âµÄÑéÖ¤Âë
+				registerDao.update(user);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
 				return "success";
 			} else {
-				//ÊÖ»úºÅÒÑ¾­×¢²áÁË
+				//ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½×¢ï¿½ï¿½ï¿½ï¿½
 				return "fail";
 			}
 		}
@@ -52,13 +52,13 @@ public class RegisterServiceImpl implements RegisterService{
 	}
 	
 	
-	//²úÉú4Î»ÊýµÄÑéÖ¤Âë£¬Ëæ»úÉú³É
+	//ï¿½ï¿½ï¿½ï¿½4Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String createRandom() {
 		StringBuilder code = new StringBuilder();
 		for (int i = 0; i < 4; i++) {
 			code.append((int)(Math.random() * 10));
 		}
-		System.out.println("²úÉúµÄÑéÖ¤ÂëÊÇ" + code.toString());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½" + code.toString());
 		return code.toString();
 	}
 	

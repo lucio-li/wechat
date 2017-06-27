@@ -5,7 +5,7 @@ import main.entity.User;
 /**
  * 
  * @author lucio.li
- * 注册的接口类
+ * 娉ㄥ唽鐨刣ao鐨勬帴鍙ｇ被
  */
 public interface RegisterDao {
 	

@@ -42,8 +42,21 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-  
-  
+	<!--log4配置
+	<listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/main/config/log4j.properties</param-value>
+    </context-param>-->
+	<!-- index.jsp
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/build/classes/main/config/log4j.properties</param-value>
+	</context-param>-->
+	 
+ 
   
   
   
