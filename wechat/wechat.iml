@@ -19,6 +19,19 @@
         </webroots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://D:/workspace/sshT/src/bean-base.xml</file>
+          <file>file://D:/workspace/sshT/build/classes/bean-base.xml</file>
+          <file>file://$MODULE_DIR$/src/bean.xml</file>
+          <file>file://$MODULE_DIR$/src/main/config/bean-service.xml</file>
+          <file>file://$MODULE_DIR$/src/main/config/bean-action.xml</file>
+          <file>file://$MODULE_DIR$/src/main/config/bean-base.xml</file>
+          <file>file://$MODULE_DIR$/src/main/config/bean-dao.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/build/classes" />

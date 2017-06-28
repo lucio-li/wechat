@@ -34,7 +34,7 @@ public class RegisterAction extends ActionSupport{
 		PrintWriter out = response.getWriter();
 		//返回数据
 		out.write(result);
-		out.write("test");
+
 
 		return null;
 	}
