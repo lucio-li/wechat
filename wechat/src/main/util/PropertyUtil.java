@@ -26,16 +26,16 @@ public class PropertyUtil {
             in = PropertyUtil.class.getClassLoader().getResourceAsStream(fileUrl);
             props.load(in);
         } catch (FileNotFoundException e) {
-            System.out.println("properties文件未找到");
-
+            //System.out.println("properties文件未找到");
+            e.printStackTrace();
         } catch (IOException e) {
-            System.out.println("出现IOException");
+            //System.out.println("出现IOException");
 
-            //e.printStackTrace();
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("出现IOException");
+            //System.out.println("出现IOException");
 
-            //e.printStackTrace();
+            e.printStackTrace();
         } finally {
             try {
                 if(null != in) {

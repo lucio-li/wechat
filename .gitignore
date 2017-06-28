@@ -5,6 +5,8 @@ Desktop.ini
 wechat/.classpath
 wechat/.settings/*
 wechat/out
+wechat/.idea
+/wechat.iml
 # My configurations:
 db.ini
 deploy_key_rsa

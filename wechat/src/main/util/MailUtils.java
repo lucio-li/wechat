@@ -38,11 +38,9 @@ public class MailUtils {
         props.setProperty("mail.smtp.host", myEmailSMTPHost);   // 发件人的邮箱的 SMTP 服务器地址
         props.setProperty("mail.smtp.auth", "true");            // 需要请求认证
 
-
-
         // 2. 根据配置创建会话对象, 用于和邮件服务器交互
         session = Session.getDefaultInstance(props);
-        session.setDebug(true);                                 // 设置为debug模式, 可以查看详细的发送 log
+        session.setDebug(false);                                 // 设置为true就是debug模式, 可以查看详细的发送 log
 
 
 
@@ -86,7 +84,7 @@ public class MailUtils {
         message.setFrom(new InternetAddress(sendMail, "SEO", "UTF-8"));
 
         // 3. To: 收件人（可以增加多个收件人、抄送、密送）
-        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "帅哥(美女)", "UTF-8"));
+        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "我", "UTF-8"));
 
         // 4. Subject: 邮件主题
         message.setSubject("欢迎使用SEO的仿wechat应用", "UTF-8");
