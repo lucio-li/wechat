@@ -41,7 +41,7 @@ public class RegisterServiceImpl implements RegisterService{
 				MailUtils.sendEmail(phone + "@163.com", code);//使用163邮箱暂替手机验证码
 			} catch (Exception e) {
 				e.printStackTrace();
-				return "failure";//发送邮件失败，可能是邮箱地址不存在
+				return "sendEmailFalse";//发送邮件失败，可能是邮箱地址不存在
 			}
 			return "success";
 		} else {
@@ -53,9 +53,10 @@ public class RegisterServiceImpl implements RegisterService{
 				registerDao.update(user);//更新数据库的验证码
 				try {
 					MailUtils.sendEmail(phone + "@163.com", code);//使用163邮箱暂替手机验证码
+
 				} catch (Exception e) {
 					e.printStackTrace();
-					return "failure";//发送邮件失败，可能是邮箱地址不存在
+					return "sendEmailFalse";//发送邮件失败，可能是邮箱地址不存在
 				}
 				return "success";
 			} else {

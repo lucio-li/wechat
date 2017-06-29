@@ -21,17 +21,18 @@ public class MailUtils {
     }
 
 
-    // 收件人邮箱（替换为自己知道的有效邮箱）
-    public static String receiveMailAccount = "592782252@qq.com";
+
 
     /**
      * 参数的初始化
      */
     public static void init() {
         account = PropertyUtil.getEmailProperty("account");
+        account = DESUtils.DK(account);//解密
         password = PropertyUtil.getEmailProperty("password");
+        password = DESUtils.DK(password);//解密
         myEmailSMTPHost = PropertyUtil.getEmailProperty("myEmailSMTPHost");
-
+        myEmailSMTPHost = DESUtils.DK(myEmailSMTPHost);//解密
         // 1. 创建参数配置, 用于连接邮件服务器的参数配置
         Properties props = new Properties();                    // 参数配置
         props.setProperty("mail.transport.protocol", "smtp");   // 使用的协议（JavaMail规范要求）

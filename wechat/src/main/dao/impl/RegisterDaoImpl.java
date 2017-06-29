@@ -1,14 +1,11 @@
 package main.dao.impl;
 
-import org.apache.log4j.Logger;
+import main.dao.RegisterDao;
+import main.entity.User;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-
-import main.dao.RegisterDao;
-import main.entity.User;
 
 public class RegisterDaoImpl implements RegisterDao{
 	// 注入sessionFactory
@@ -38,11 +35,11 @@ public class RegisterDaoImpl implements RegisterDao{
 		try {
 			session = sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(User.class);
-			// ��������
+			// 添加限制
 			criteria.add(Restrictions.eq("phone", phone));
 			
 			if (criteria.list().size() == 0) {
-				System.out.println("û�и�����");
+
 				return null;
 			} else {
 				user = (User) criteria.list().get(0);
@@ -59,7 +56,7 @@ public class RegisterDaoImpl implements RegisterDao{
 	public void update(User user) {
 		try {
 			sessionFactory.getCurrentSession().update(user);
-			sessionFactory.getCurrentSession().flush();//updateҪflush������Ч
+			sessionFactory.getCurrentSession().flush();//update要flush才能更新
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
