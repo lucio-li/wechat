@@ -30,17 +30,20 @@
 
 		<!-- Ation实例交给spring容器创建 -->
 		
-		<!-- Action -->
+		<!-- 发送注册手机验证码的Action -->
 		<action name="sendRegisterCode" class="main.action.RegisterAction" method="sendRegisterCode">
-		
 			<!-- 失败 -->
 			<result name="faild">/login.jsp</result>
-			
 			<!-- 成功 -->
 			<result name="success">/login.jsp</result>
-		
 		</action>
-		
+		<!-- 发送注册手机验证码的Action -->
+		<action name="checkRegisterCode" class="main.action.RegisterAction" method="checkRegisterCode">
+			<!-- 失败 -->
+			<result name="faild">/login.jsp</result>
+			<!-- 成功 -->
+			<result name="success">/login.jsp</result>
+		</action>
 		
 	</package>
 

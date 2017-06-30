@@ -6,7 +6,16 @@ package main.service;
  */
 public interface RegisterService {
 	/**
-	 * 注册的发送验证码
+	 * 注册时发送
+	 * @param phoneNumber
+	 * @return
 	 */
 	String sendRegisterCode(String phoneNumber);
+
+	/**
+	 *
+	 * @param phoneNumber
+	 * @return
+	 */
+	String checkRegisterCode(String phoneNumber, String code);
 }

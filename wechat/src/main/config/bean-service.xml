@@ -19,6 +19,7 @@
 	<bean id="registerService" class="main.service.impl.RegisterServiceImpl">
 		<property name="registerDao" ref="registerDao"></property>
 	</bean>
+
 	
 	
 </beans>     

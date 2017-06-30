@@ -69,6 +69,23 @@ public class RegisterServiceImpl implements RegisterService{
 		
 	}
 
+	@Override
+	public String checkRegisterCode(String phone, String code) {
+		System.out.println(phone + code);
+		//参数错误，返回false
+		if (phone == null || code == null || code.length() != 4) {
+			return "false";
+		}
+		//调用dao，查询对应的user信息
+		User user = (User) registerDao.findByPhone(phone);
+		if (user == null || !code.equals(user.getIdentify_code())) {//验证码错误
+			return "false";
+		} else {
+			return "true";
+		}
+
+	}
+
 
 	/**
 	 * 产生四位验证码
