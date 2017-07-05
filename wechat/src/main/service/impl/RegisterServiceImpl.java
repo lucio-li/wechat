@@ -27,6 +27,10 @@ public class RegisterServiceImpl implements RegisterService{
 	 */
 	@Override
 	public String sendRegisterCode(String phone) {
+		if (phone == null || phone.trim().equals("")) {
+			return "failure";//参数错误
+		}
+
 		User user = (User) registerDao.findByPhone(phone);
 		
 		String code = null;
@@ -36,13 +40,13 @@ public class RegisterServiceImpl implements RegisterService{
 			user = new User();
 			user.setPhone(phone);
 			user.setIdentify_code(code);
-			registerDao.save(user);
 			try {
 				MailUtils.sendEmail(phone + "@163.com", code);//使用163邮箱暂替手机验证码
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "sendEmailFalse";//发送邮件失败，可能是邮箱地址不存在
 			}
+			registerDao.save(user);
 			return "success";
 		} else {
 			//再次获取手机验证码，如果没注册成功
@@ -50,7 +54,6 @@ public class RegisterServiceImpl implements RegisterService{
 				code = createRandom();
 				user.setIdentify_code(code);
 				
-				registerDao.update(user);//更新数据库的验证码
 				try {
 					MailUtils.sendEmail(phone + "@163.com", code);//使用163邮箱暂替手机验证码
 
@@ -58,6 +61,7 @@ public class RegisterServiceImpl implements RegisterService{
 					e.printStackTrace();
 					return "sendEmailFalse";//发送邮件失败，可能是邮箱地址不存在
 				}
+				registerDao.update(user);//更新数据库的验证码
 				return "success";
 			} else {
 				//手机号已经注册成功

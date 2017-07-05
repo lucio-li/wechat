@@ -6,7 +6,7 @@ package main.service;
  */
 public interface RegisterService {
 	/**
-	 * 注册时发送
+	 * 注册时发送验证码
 	 * @param phoneNumber
 	 * @return
 	 */

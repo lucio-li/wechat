@@ -5,7 +5,7 @@ Desktop.ini
 wechat/.classpath
 wechat/.settings/*
 wechat/out
-wechat/.idea
+wechat/.idea/*
 /wechat.iml
 /workspace.xml
 # My configurations:
