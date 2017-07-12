@@ -16,7 +16,6 @@ public class RegisterDaoImpl implements RegisterDao{
 	}
 	@Override
 	public void save(User user) {
-		System.out.println("进入save方法");
 		try {
 			sessionFactory.getCurrentSession().save(user);
 		} catch (Exception e) {

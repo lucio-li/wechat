@@ -10,15 +10,13 @@
 	
 	
 		<!-- 全局视图 -->
-		<global-results>
-			<result name="success">/index.jsp</result>
-			
-			<result name="login" type="redirect">/login.jsp</result>
-			
-			<!-- 错误视图配置 -->
-			<result name="null">/error/null.jsp</result>
-			<result name="error">/error/error.jsp</result>
-		</global-results>
+		<!--<global-results>-->
+			<!--<result name="success">/index.jsp</result>-->
+			<!--<result name="login" type="redirect">/login.jsp</result>-->
+			<!--&lt;!&ndash; 错误视图配置 &ndash;&gt;-->
+			<!--<result name="null">/error/null.jsp</result>-->
+			<!--<result name="error">/error/error.jsp</result>-->
+		<!--</global-results>-->
 		
 		<!-- 全局异常 -->
 		<global-exception-mappings>
@@ -29,20 +27,28 @@
 		
 
 		<!-- Ation实例交给spring容器创建 -->
+		<action name="register" class="main.action.RegisterAction" method="register">
+			<!-- 限制运行上传的文件的类型及大小 -->
+			<interceptor-ref name="defaultStack">
+				<param name="fileUpload.allowedExtensions">jpg,png,bmp,x-png,gif,jpeg</param>
+				<param name="maximumSize">2M</param>
+				<!-- 限制运行的类型   【与上面同时使用，取交集】
+				<param name="fileUpload.allowedTypes">text/plain</param>
+				-->
+			</interceptor-ref>
+		</action>
+
 		
 		<!-- 发送注册手机验证码的Action -->
-		<action name="sendRegisterCode" class="main.action.RegisterAction" method="sendRegisterCode">
-			<!-- 失败 -->
-			<result name="faild">/login.jsp</result>
-			<!-- 成功 -->
-			<result name="success">/login.jsp</result>
-		</action>
+		<!--<action name="sendRegisterCode" class="main.action.RegisterAction" method="sendRegisterCode">-->
+			<!--&lt;!&ndash; 失败 &ndash;&gt;-->
+			<!--<result name="faild">/login.jsp</result>-->
+			<!--&lt;!&ndash; 成功 &ndash;&gt;-->
+			<!--<result name="success">/login.jsp</result>-->
+		<!--</action>-->
 		<!-- 发送注册手机验证码的Action -->
 		<action name="checkRegisterCode" class="main.action.RegisterAction" method="checkRegisterCode">
-			<!-- 失败 -->
-			<result name="faild">/login.jsp</result>
-			<!-- 成功 -->
-			<result name="success">/login.jsp</result>
+
 		</action>
 		
 	</package>
