@@ -6,5 +6,7 @@ package test;
 public class Test {
     public static void main(String[] args) {
         //System.out.println("dsa" + PropertyUtil.a);
+    	String url = System.getProperty("user.home");
+    	System.out.println(url);
     }
 }

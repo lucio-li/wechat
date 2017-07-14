@@ -36,6 +36,7 @@
 				<param name="fileUpload.allowedTypes">text/plain</param>
 				-->
 			</interceptor-ref>
+
 		</action>
 
 		

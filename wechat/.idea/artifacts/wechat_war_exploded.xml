@@ -49,6 +49,12 @@
           <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/jackson-core-2.9.0.pr4.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/jackson-databind-2.5.0.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/jackson-annotations-2.9.0.pr4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/xwork - jar.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/ezmorph-1.0.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/commons-beanutils.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/json-lib-2.3-jdk15.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/commons-collections-3.2.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/struts2-json-plugin-2.3.4.1.jar" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="wechat/web/Web" />

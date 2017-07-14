@@ -6,6 +6,7 @@ import main.dao.impl.RegisterDaoImpl;
 import main.entity.User;
 import main.service.RegisterService;
 import main.util.MailUtils;
+import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
@@ -28,9 +29,9 @@ public class RegisterServiceImpl implements RegisterService{
 	@Override
 	public String register(User user, File file, String fileFileName) {
 		String filePath = null;
+		JSONObject jsonObject = new JSONObject();
 		if (file != null) {
 			String path = ServletActionContext.getServletContext().getRealPath("/upload");
-			System.out.println(path);
 			File destPath = new File(path);
 			if (!destPath.exists()) {
 				destPath.mkdir();
@@ -49,7 +50,9 @@ public class RegisterServiceImpl implements RegisterService{
 
 		String phone = user.getPhone();
 		if (phone == null || phone.trim().equals("")) {
-			return "failure";//参数错误
+			jsonObject.put("state", "failure");
+			jsonObject.put("msg", "phone can't be null");
+			return jsonObject.toString();//参数错误
 		}
 		String code = null;
 		User userMsg = (User) registerDao.findByPhone(phone);
@@ -62,10 +65,13 @@ public class RegisterServiceImpl implements RegisterService{
 				MailUtils.sendEmail(phone + "@163.com", code);//使用163邮箱暂替手机验证码
 			} catch (Exception e) {
 				e.printStackTrace();
-				return "sendEmailFalse";//发送邮件失败，可能是邮箱地址不存在
+				jsonObject.put("state", "failure");
+				jsonObject.put("msg", "email address error");
+				return jsonObject.toString();//发送邮件失败，可能是邮箱地址不存在
 			}
 			registerDao.save(user);
-			return "success";
+			jsonObject.put("state", "success");
+			return jsonObject.toString();
 		} else {
 			//再次注册，如果没注册成功
 			if (userMsg.getStatus() == 0) {
@@ -80,17 +86,22 @@ public class RegisterServiceImpl implements RegisterService{
 
 				} catch (Exception e) {
 					e.printStackTrace();
-					return "sendEmailFalse";//发送邮件失败，可能是邮箱地址不存在
+					jsonObject.put("state", "failure");
+					jsonObject.put("msg", "email address error");
+					return jsonObject.toString();//发送邮件失败，可能是邮箱地址不存在
 				}
 				registerDao.update(userMsg);//更新数据库的验证码
-				return "success";
+				jsonObject.put("state", "success");
+				return jsonObject.toString();
 			} else {
 				//手机号已经注册成功
-				return "user already exists";
+				jsonObject.put("state", "failure");
+				jsonObject.put("msg", "user already exists");
+				return jsonObject.toString();
 			}
 		}
 
-		//return null;
+
 	}
 
 
