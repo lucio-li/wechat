@@ -74,7 +74,7 @@ module.exports = (options = {}) => ({
         port: 8010,
         proxy: {
             '/api/': {
-                target: ' https://cnodejs.org/api',
+                target: 'http://182.254.154.240:8080/wechat',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''

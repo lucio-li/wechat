@@ -9,8 +9,9 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.defaults.baseURL =  '/api';
 
 //POST传参序列化
+var contentType = 'Content-Type'
 axios.interceptors.request.use((config) => {
-    if(config.method  === 'post'){
+    if(config.method  === 'post' && config.headers.patch[contentType]==='application/x-www-form-urlencoded'){
         config.data = querystring.stringify(config.data);
     }
     return config;
