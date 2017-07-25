@@ -10,7 +10,7 @@ import main.entity.User;
 public interface RegisterDao {
 	
 	void save(User user);
-	User findByPhone(String phone);
+	User findByEmail(String email);
 	void update(User user);
 	
 }

@@ -19,8 +19,9 @@
 	<bean id="registerDao" class="main.dao.impl.RegisterDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
-	
+	<bean id="loginDao" class="main.dao.impl.LoginDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>     
 
 

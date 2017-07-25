@@ -8,8 +8,8 @@
             <column name="id" />
             <generator class="native" />
         </id>
-        <property name="phone" type="java.lang.String">
-            <column name="phone" />
+        <property name="email" type="java.lang.String">
+            <column name="email" />
         </property>
         <property name="username" type="java.lang.String">
             <column name="username" />

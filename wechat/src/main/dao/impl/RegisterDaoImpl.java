@@ -22,20 +22,17 @@ public class RegisterDaoImpl implements RegisterDao{
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+
 	}
 	@Override
-	public User findByPhone(String phone) {
+	public User findByEmail(String email) {
 		User user = null;
 		Session session = null;
 		try {
 			session = sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(User.class);
 			// 添加限制
-			criteria.add(Restrictions.eq("phone", phone));
+			criteria.add(Restrictions.eq("email", email));
 			
 			if (criteria.list().size() == 0) {
 

@@ -1,17 +1,16 @@
 package main.service.impl;
 
 
+import main.callable.EmailSender;
+import main.callable.ImageUploader;
 import main.dao.RegisterDao;
 import main.dao.impl.RegisterDaoImpl;
 import main.entity.User;
 import main.service.RegisterService;
-import main.util.MailUtils;
 import net.sf.json.JSONObject;
-import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.File;
-import java.io.IOException;
 
 
 /**
@@ -28,49 +27,69 @@ public class RegisterServiceImpl implements RegisterService{
 
 	@Override
 	public String register(User user, File file, String fileFileName) {
-		String filePath = null;
+
+
+
 		JSONObject jsonObject = new JSONObject();
-		if (file != null) {
-			String path = ServletActionContext.getServletContext().getRealPath("/upload");
-			File destPath = new File(path);
-			if (!destPath.exists()) {
-				destPath.mkdir();
+		String path = ServletActionContext.getServletContext().getRealPath("/upload");
+		String filePath = path + "/" + fileFileName;
+		user.setHead_img(filePath);//头像路径
+
+
+
+		String email = user.getEmail();
+		if (email == null || email.trim().equals("")) {
+			jsonObject.put("status", "failure");
+			jsonObject.put("msg", "email can't be null");
+			return jsonObject.toString();//参数错误
+		}
+		User userMsg = (User) registerDao.findByEmail(email);
+
+		//没注册，数据库还没数据
+		if (userMsg == null) {
+			jsonObject.put("status", "failure");
+			jsonObject.put("msg", "user don't exist");
+			return jsonObject.toString();
+		} else {
+			//已注册，上传头像
+			File oldImg = new File(userMsg.getHead_img());
+			if (oldImg.exists()) {
+				oldImg.delete();
 			}
-			File destFile = new File(path, fileFileName);
-			try {
-				FileUtils.copyFile(file, destFile);
-				filePath = destFile.getAbsolutePath();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			ImageUploader imageUploader = new ImageUploader(file, fileFileName, path);
+			imageUploader.start();//文件上传多线程
+			userMsg.setHead_img(user.getHead_img());
+
+			registerDao.update(userMsg);//更新数据库的头像url
+			jsonObject.put("status", "success");
+			return jsonObject.toString();
 
 		}
-		user.setHead_img(filePath);
 
 
-		String phone = user.getPhone();
-		if (phone == null || phone.trim().equals("")) {
-			jsonObject.put("state", "failure");
-			jsonObject.put("msg", "phone can't be null");
+	}
+
+	@Override
+	public String register(User user) {
+		JSONObject jsonObject = new JSONObject();
+		String email = user.getEmail();
+		if (email == null || email.trim().equals("")) {
+			jsonObject.put("status", "failure");
+			jsonObject.put("msg", "email can't be null");
 			return jsonObject.toString();//参数错误
 		}
 		String code = null;
-		User userMsg = (User) registerDao.findByPhone(phone);
+		User userMsg = (User) registerDao.findByEmail(email);
 
 		//第一次注册，数据库还没数据
 		if (userMsg == null) {
 			code = createRandom();//生成随机的验证码
 			user.setIdentify_code(code);
-			try {
-				MailUtils.sendEmail(phone + "@163.com", code);//使用163邮箱暂替手机验证码
-			} catch (Exception e) {
-				e.printStackTrace();
-				jsonObject.put("state", "failure");
-				jsonObject.put("msg", "email address error");
-				return jsonObject.toString();//发送邮件失败，可能是邮箱地址不存在
-			}
+
+			EmailSender emailSender = new EmailSender(email, code);
+			emailSender.start();//多线程发送邮件验证码
 			registerDao.save(user);
-			jsonObject.put("state", "success");
+			jsonObject.put("status", "success");
 			return jsonObject.toString();
 		} else {
 			//再次注册，如果没注册成功
@@ -79,23 +98,15 @@ public class RegisterServiceImpl implements RegisterService{
 				userMsg.setIdentify_code(code);
 				userMsg.setUsername(user.getUsername());
 				userMsg.setPassword(user.getPassword());
-				userMsg.setHead_img(user.getHead_img());
-				userMsg.setPhone(user.getPhone());
-				try {
-					MailUtils.sendEmail(phone + "@163.com", code);//使用163邮箱暂替手机验证码
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					jsonObject.put("state", "failure");
-					jsonObject.put("msg", "email address error");
-					return jsonObject.toString();//发送邮件失败，可能是邮箱地址不存在
-				}
+				userMsg.setEmail(user.getEmail());
+				EmailSender emailSender = new EmailSender(email, code);
+				emailSender.start();//发送邮件验证码
 				registerDao.update(userMsg);//更新数据库的验证码
-				jsonObject.put("state", "success");
+				jsonObject.put("status", "success");
 				return jsonObject.toString();
 			} else {
-				//手机号已经注册成功
-				jsonObject.put("state", "failure");
+				//邮箱已经注册成功
+				jsonObject.put("status", "failure");
 				jsonObject.put("msg", "user already exists");
 				return jsonObject.toString();
 			}
@@ -105,20 +116,26 @@ public class RegisterServiceImpl implements RegisterService{
 	}
 
 
-
 	@Override
-	public String checkRegisterCode(String phone, String code) {
-		System.out.println(phone + code);
+	public String checkRegisterCode(String email, String code) {
+		JSONObject jsonObject = new JSONObject();
 		//参数错误，返回false
-		if (phone == null || code == null || code.length() != 4) {
-			return "false";
+		if (email == null || code == null || code.length() != 4) {
+			jsonObject.put("status", "failure");
+			jsonObject.put("msg", "args error");
+			return jsonObject.toString();
 		}
 		//调用dao，查询对应的user信息
-		User user = (User) registerDao.findByPhone(phone);
+		User user = (User) registerDao.findByEmail(email);
 		if (user == null || !code.equals(user.getIdentify_code())) {//验证码错误
-			return "false";
+			jsonObject.put("status", "false");
+			jsonObject.put("msg", "code error");
+			return jsonObject.toString();
 		} else {
-			return "true";
+			user.setStatus(1);//注册成功，修改状态为1，已注册
+			registerDao.update(user);
+			jsonObject.put("status", "success");
+			return jsonObject.toString();
 		}
 
 	}
@@ -135,5 +152,6 @@ public class RegisterServiceImpl implements RegisterService{
 		}
 		return code.toString();
 	}
-	
+
+
 }

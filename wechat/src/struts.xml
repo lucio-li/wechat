@@ -5,10 +5,7 @@
 
 <struts>
 
-	<package name="wechat" namespace="/" extends="struts-default">
-	
-	
-	
+	<package name="register" namespace="/register" extends="struts-default">
 		<!-- 全局视图 -->
 		<!--<global-results>-->
 			<!--<result name="success">/index.jsp</result>-->
@@ -27,7 +24,7 @@
 		
 
 		<!-- Ation实例交给spring容器创建 -->
-		<action name="register" class="main.action.RegisterAction" method="register">
+		<action name="create" class="main.action.RegisterAction" method="register">
 			<!-- 限制运行上传的文件的类型及大小 -->
 			<interceptor-ref name="defaultStack">
 				<param name="fileUpload.allowedExtensions">jpg,png,bmp,x-png,gif,jpeg</param>
@@ -36,22 +33,21 @@
 				<param name="fileUpload.allowedTypes">text/plain</param>
 				-->
 			</interceptor-ref>
-
 		</action>
 
-		
-		<!-- 发送注册手机验证码的Action -->
-		<!--<action name="sendRegisterCode" class="main.action.RegisterAction" method="sendRegisterCode">-->
-			<!--&lt;!&ndash; 失败 &ndash;&gt;-->
-			<!--<result name="faild">/login.jsp</result>-->
-			<!--&lt;!&ndash; 成功 &ndash;&gt;-->
-			<!--<result name="success">/login.jsp</result>-->
-		<!--</action>-->
-		<!-- 发送注册手机验证码的Action -->
-		<action name="checkRegisterCode" class="main.action.RegisterAction" method="checkRegisterCode">
-
+		<!-- 检查注册手机验证码的Action -->
+		<action name="code" class="main.action.RegisterAction" method="checkRegisterCode">
 		</action>
-		
+
 	</package>
-
+	<package name="login" namespace="/login" extends="struts-default">
+		<!-- 全局异常 -->
+		<global-exception-mappings>
+			<!-- result 会取找全局视图的名称 -->
+			<exception-mapping result="null" exception="java.lang.NullPointerException"></exception-mapping>
+			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<action name="pwd" class="main.action.LoginAction">
+		</action>
+	</package>
 </struts>

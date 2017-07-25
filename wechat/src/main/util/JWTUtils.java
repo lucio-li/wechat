@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import main.entity.User;
+import net.sf.json.JSONObject;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.SecretKey;
@@ -14,14 +16,15 @@ import java.util.Date;
  * Created by lucio.li on 2017/7/5.
  */
 public class JWTUtils {
-    private static String jianshu = "11";
+   // private static String jianshu = "11";
 
     /**
      * 由字符串生成加密key
      * @return
      */
     public static SecretKey generalKey(){
-        String stringKey = jianshu + Constant.JWT_SECRET;
+        //String stringKey = jianshu + Constant.JWT_SECRET;
+        String stringKey = Constant.JWT_SECRET;
         byte[] encodedKey = Base64.decodeBase64(stringKey);
         SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
         return key;
@@ -35,7 +38,7 @@ public class JWTUtils {
      * @return
      * @throws Exception
      */
-    public static String createJWT(String id, String subject, long ttlMillis) throws Exception {
+    public static String createJWT(String id, String subject, long ttlMillis)  {
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         long nowMillis = System.currentTimeMillis();
@@ -74,12 +77,12 @@ public class JWTUtils {
      * @param user
      * @return
      */
-//    public static String generalSubject(t_user user){
-//        JSONObject jo = new JSONObject();
-//        jo.put("userId", user.getId());
-//        jo.put("mobile", user.getMobile());
-//        return jo.toJSONString();
-//    }
+    public static String generalSubject(User user){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("userId", user.getId());
+        jsonObject.put("email", user.getEmail());
+        return jsonObject.toString();
+    }
     public static void main(String[] args) {
 
         try {

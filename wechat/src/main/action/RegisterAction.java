@@ -53,20 +53,28 @@ public class RegisterAction extends ActionSupport{
 	 * 注册的action
 	 */
 	public String register() throws IOException {
-		System.out.println("开始注册");
+		long start=System.currentTimeMillis(); //获取开始时间
+
+
 		// 获取request和response
 		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 		HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
 
+		response.setHeader("Access-Control-Allow-Origin","*");
 
 		User user = new User();
-
-		user.setUsername(request.getParameter("username"));
-		user.setPassword(request.getParameter("password"));
-		user.setPhone(request.getParameter("phone"));
-		System.out.println(request.getParameter("username"));
+		user.setEmail(request.getParameter("email"));
 		//调用service
-		String result = registerService.register(user, file, fileFileName);
+		String result = null;
+		if (file == null) {//注册，不带头像
+			user.setUsername(request.getParameter("username"));
+			user.setPassword(request.getParameter("password"));
+			result = registerService.register(user);
+		} else {
+			result = registerService.register(user, file, fileFileName);
+		}
+
+
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
@@ -75,6 +83,7 @@ public class RegisterAction extends ActionSupport{
 		out.write(result);
 		out.flush();
 		out.close();
+
 		return "success";
 
 	}
@@ -83,7 +92,6 @@ public class RegisterAction extends ActionSupport{
 		JSONObject jsonObject=new JSONObject();
 //		jsonObject.accumulate("user", user);
 		jsonObject.put("user", "user");
-		System.out.println(jsonObject.toString());
 	}
 
 
@@ -92,7 +100,7 @@ public class RegisterAction extends ActionSupport{
 
 
 	/**
-	 * 注册时检查手机验证码是否正确
+	 * 注册时检查邮箱验证码是否正确
 	 * @throws IOException
 	 */
 	public void checkRegisterCode() throws IOException {
@@ -102,7 +110,7 @@ public class RegisterAction extends ActionSupport{
 		HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
 
 		//获取手机号码
-		String phone = request.getParameter("phone");
+		String phone = request.getParameter("email");
 		String code = request.getParameter("code");
 
 		//调用service

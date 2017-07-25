@@ -19,6 +19,9 @@
 	<bean id="registerService" class="main.service.impl.RegisterServiceImpl">
 		<property name="registerDao" ref="registerDao"></property>
 	</bean>
+	<bean id="loginService" class="main.service.impl.LoginServiceImpl">
+		<property name="loginDao" ref="loginDao"></property>
+	</bean>
 
 	
 	
