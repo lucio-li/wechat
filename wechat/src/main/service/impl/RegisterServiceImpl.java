@@ -25,6 +25,13 @@ public class RegisterServiceImpl implements RegisterService{
 		this.registerDao = registerDao;
 	}
 
+	/**
+	 *
+	 * @param user
+	 * @param file
+	 * @param fileFileName
+	 * @return
+	 */
 	@Override
 	public String register(User user, File file, String fileFileName) {
 
@@ -69,6 +76,11 @@ public class RegisterServiceImpl implements RegisterService{
 
 	}
 
+	/**
+	 *
+	 * @param user
+	 * @return
+	 */
 	@Override
 	public String register(User user) {
 		JSONObject jsonObject = new JSONObject();
