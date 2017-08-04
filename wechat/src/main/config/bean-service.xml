@@ -17,7 +17,7 @@
 	<!-- Service 需要注入 Dao -->
 	
 	<bean id="registerService" class="main.service.impl.RegisterServiceImpl">
-		<property name="registerDao" ref="registerDao"></property>
+		<property name="userDao" ref="userDao"></property>
 	</bean>
 	<bean id="loginService" class="main.service.impl.LoginServiceImpl">
 		<property name="loginDao" ref="loginDao"></property>

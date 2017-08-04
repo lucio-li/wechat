@@ -16,7 +16,7 @@
 
 	<!-- Dao 注入 SessionFactory -->
 	
-	<bean id="registerDao" class="main.dao.impl.RegisterDaoImpl">
+	<bean id="userDao" class="main.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="loginDao" class="main.dao.impl.LoginDaoImpl">

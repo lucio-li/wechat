@@ -50,6 +50,10 @@ public class RegisterDaoImpl implements RegisterDao{
 	}
 	@Override
 	public void update(User user) {
+		User userMsg = findByEmail(user.getEmail());
+		if (userMsg == null) {
+
+		}
 		try {
 			sessionFactory.getCurrentSession().update(user);
 			sessionFactory.getCurrentSession().flush();//update要flush才能更新
